@@ -2,13 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useRecoilState, atom } from 'recoil';
 import './App.css';
 import Giph from './util/Giph';
-const key = 'qXA4kusyCMAcAkmUDWWLaBCCSJf7e044';
-const url = `https://api.giphy.com/v1/gifs/random?api_key=${key}`;
 
 
 function ShowGiph({ giph }) {
   return (
-    <img src={giph} height="500px" width="500px" ></img>
+    <div className="random-giph">
+      <h1>RANDOM GIPH</h1>
+      <img src={giph} height="300px" width="300px" ></img>;
+    </div>
+  )
+}
+
+function ShowSearchGiph({ giphs }) {
+  return (
+    giphs.map((giph, index) => {
+      return (<div className="search-results">
+        <img src={giph} key={index} height="300px" width="300px" ></img>;
+      </div>
+      )
+    })
   )
 }
 
@@ -23,11 +35,13 @@ function RandomButton({ switchGiph }) {
 
 function SearchGiph({ giphSearch }) {
   const [value, setValue] = useState('');
+  const [amount, setAmount] = useState('');
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
-    giphSearch(value);
+    giphSearch(value, amount);
     setValue('');
+    setAmount(0);
   }
   return (
     <div className="giph-search">
@@ -36,30 +50,41 @@ function SearchGiph({ giphSearch }) {
         <input type="text"
           className="input"
           placeholder="Search Giph"
+          value={value}
           onChange={e => setValue(e.target.value)}>
         </input>
+        <input type="number" className="input" onChange={e => setAmount(e.target.value)}></input>
+        <input type="submit"></input>
       </form>
     </div>
   )
 }
+
+const randomGiphState = atom({
+  key: "random-giph",
+  default: []
+})
 
 const giphState = atom({
   key: "giphs",
   default: []
 })
 
+
+
 function App() {
-  const [giph, setGiph] = useRecoilState(giphState);
+  const [giph, setRandomGiph] = useRecoilState(randomGiphState);
+  const [giphs, setGiph] = useRecoilState(giphState);
 
   const switchGiph = () => {
     Giph.getRandomGiph().then(giph => {
-      setGiph(giph);
+      setRandomGiph(giph);
     });
   }
-  const giphSearch = (inputValue) => {
-    Giph.getGiph(inputValue).then(giph => {
+  const giphSearch = (inputValue, amount) => {
+    Giph.getGiph(inputValue, amount).then(giph => {
       setGiph(giph);
-    })
+    });
   }
   return <div className="app">
     <div className="giphs">
@@ -69,7 +94,9 @@ function App() {
         <RandomButton switchGiph={switchGiph} />
       </div>
       <div className="giph-display">
+        <ShowSearchGiph giphs={giphs} />
         <ShowGiph giph={giph} />
+
       </div>
     </div>
   </div>;

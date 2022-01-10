@@ -17,16 +17,16 @@ const Giph = {
         }
     },
 
-    async getGiph(inputValue) {
-        const urlToFetch = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${inputValue}&limit=1`
+    async getGiph(inputValue, amount) {
+        const urlToFetch = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${inputValue}&limit=${amount}`
         try {
             const response = await fetch(urlToFetch);
             if (response.ok) {
                 const jsonResponse = await response.json();
                 console.log(jsonResponse);
                 // const giphies = jsonResponse.data[0].images.original.url;
-                // const giphies = jsonResponse.data.map(item => item.images.original.url);
-                const giphies = jsonResponse.data[0].images.original.url;
+                const giphies = jsonResponse.data.map(item => item.images.original.url);
+                //const giphies = jsonResponse.data[0].images.original.url;
                 console.log(giphies);
                 return giphies;
             }
