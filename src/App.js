@@ -3,7 +3,7 @@ import { useRecoilState, atom } from 'recoil';
 import './App.css';
 import Giph from './util/Giph';
 import { randomGiphState as randomGiphAtom, giphState as giphAtom } from './atoms';
-
+console.log(process.env.REACT_APP_API_KEY);
 
 function ShowGiph({ giph }) {
   return (
@@ -61,17 +61,6 @@ function SearchGiph({ giphSearch }) {
   )
 }
 
-/*const randomGiphState = atom({
-  key: "random-giph",
-  default: []
-})
-
-const giphState = atom({
-  key: "giphs",
-  default: []
-})*/
-
-
 
 function App() {
   const [giph, setRandomGiph] = useRecoilState(randomGiphAtom);
@@ -95,9 +84,9 @@ function App() {
         <RandomButton switchGiph={switchGiph} />
       </div>
       <div className="giph-display">
-        <ShowSearchGiph giphs={giphs} />
         <ShowGiph giph={giph} />
-
+        <h1>Search Results</h1>
+        <ShowSearchGiph giphs={giphs} />
       </div>
     </div>
   </div>;

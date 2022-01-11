@@ -1,5 +1,5 @@
-const key = 'qXA4kusyCMAcAkmUDWWLaBCCSJf7e044';
-const url = `https://api.giphy.com/v1/gifs/random?api_key=${key}`;
+
+const url = `https://api.giphy.com/v1/gifs/random?api_key=${process.env.REACT_APP_API_KEY}`;
 
 
 const Giph = {
@@ -18,7 +18,7 @@ const Giph = {
     },
 
     async getGiph(inputValue, amount) {
-        const urlToFetch = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${inputValue}&limit=${amount}`
+        const urlToFetch = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.REACT_APP_API_KEY}&q=${inputValue}&limit=${amount}`
         try {
             const response = await fetch(urlToFetch);
             if (response.ok) {
