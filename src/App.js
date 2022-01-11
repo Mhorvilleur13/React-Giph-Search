@@ -4,11 +4,9 @@ import './App.css';
 import Giph from './util/Giph';
 import { randomGiphState as randomGiphAtom, giphState as giphAtom } from './atoms';
 import { ShowRandomGiph } from '../src/Random-Giph/Random-Giph';
-import { ShowSearchGiph } from '../src/Search-Giph/Search-Giph';
+import { ShowSearchGiph } from './Search-Giph_Display/SearchedGiph';
 import { RandomButton } from '../src/SearchBar/SearchRandom';
 import { SearchGiph } from '../src/SearchBar/SearchGiph';
-
-
 
 
 function App() {
