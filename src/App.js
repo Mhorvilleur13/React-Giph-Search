@@ -40,13 +40,11 @@ function App() {
         <h1>Click on the Giph to Save</h1>
       </div>
       <div className="giph-display">
-
         <ShowRandomGiph giph={giph} addGiph={addGiph} />
         <div className="search-results">
           <h1>SEARCH RESULTS</h1>
           <ShowSearchGiph giphs={giphs} addGiph={addGiph} />
         </div>
-
       </div>
       <div className="playlist">
         <h1>Playlist</h1>
