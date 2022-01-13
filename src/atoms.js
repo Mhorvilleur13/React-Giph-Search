@@ -9,3 +9,8 @@ export const giphState = atom({
     key: "giphs",
     default: []
 });
+
+export const giphPlaylistState = atom({
+    key: "giph-playlist",
+    default: []
+})
