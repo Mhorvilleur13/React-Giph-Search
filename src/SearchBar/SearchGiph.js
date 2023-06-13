@@ -12,7 +12,7 @@ export function SearchGiph({ giphSearch }) {
   };
   return (
     <div className="giph-search">
-      <h1>Search</h1>
+      <h1>Search for second</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
