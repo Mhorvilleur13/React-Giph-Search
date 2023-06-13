@@ -25,6 +25,11 @@ function App() {
       setGiph(giph);
     });
   }
+  const removeGiph = (giphToRemove) => {
+    const newGiphPlaylist = [...giphPlaylist];
+    let finalList = newGiphPlaylist.filter(giph => giph !== giphToRemove);
+    setGiphPlaylist(finalList);
+  }
 
   const addGiph = (giphToAdd) => {
     const newGiphPlaylist = [...giphPlaylist];
@@ -48,7 +53,7 @@ function App() {
       </div>
       <div className="playlist">
         <h1>Playlist</h1>
-        <GiphPlaylist giphPlaylist={giphPlaylist} />
+        <GiphPlaylist giphPlaylist={giphPlaylist} removeGiph={removeGiph} />
       </div>
     </div>
   </div>;
